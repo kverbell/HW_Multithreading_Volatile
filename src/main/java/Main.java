@@ -16,11 +16,7 @@ public class Main {
 
         Thread thread1 = new Thread(() -> {
             for (String s : texts) {
-                switch (isPalindrome(s)) {
-                    case 3 -> threeChars.incrementAndGet();
-                    case 4 -> fourChars.incrementAndGet();
-                    case 5 -> fiveChars.incrementAndGet();
-                }
+                incrementCounters(isPalindrome(s), threeChars, fourChars, fiveChars);
             }
         });
 
@@ -29,11 +25,7 @@ public class Main {
 
         Thread thread2 = new Thread(() -> {
             for (String s : texts) {
-                switch (isSimilarLetters(s)) {
-                    case 3 -> threeChars.incrementAndGet();
-                    case 4 -> fourChars.incrementAndGet();
-                    case 5 -> fiveChars.incrementAndGet();
-                }
+                incrementCounters(isSimilarLetters(s), threeChars, fourChars, fiveChars);
             }
         });
 
@@ -42,11 +34,7 @@ public class Main {
 
         Thread thread3 = new Thread(() -> {
             for (String s : texts) {
-                switch (isIncreasingLetters(s)) {
-                    case 3 -> threeChars.incrementAndGet();
-                    case 4 -> fourChars.incrementAndGet();
-                    case 5 -> fiveChars.incrementAndGet();
-                }
+                incrementCounters(isIncreasingLetters(s), threeChars, fourChars, fiveChars);
             }
         });
 
@@ -131,6 +119,14 @@ public class Main {
         } else {
             return 0;
         }
+    }
 
+    public static void incrementCounters(int textChecking, AtomicInteger threeChars,
+                                         AtomicInteger fourChars, AtomicInteger fiveChars) {
+        switch (textChecking) {
+            case 3 -> threeChars.incrementAndGet();
+            case 4 -> fourChars.incrementAndGet();
+            case 5 -> fiveChars.incrementAndGet();
+        }
     }
 }
